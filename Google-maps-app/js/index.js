@@ -2,11 +2,12 @@ let map;
 let infoWindow;
 let markers = [];
 
-function initMap() {
-const lasVegas = {lat: 36.188110, lng: -115.176468};
-map = new google.maps.Map(document.getElementById("map"), {
-center: lasVegas,
-zoom: 11,
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+    const lasVegas = {lat: 36.188110, lng: -115.176468};
+    map = new Map(document.getElementById("map"), {
+    center: lasVegas,
+    zoom: 11,
 });
     infoWindow = new google.maps.InfoWindow();
     // getStore();
@@ -33,7 +34,7 @@ const getStores = () => {
         }
         }).then((data) => {
             if (data.length > 0) {
-                clearLocations();
+                clearMarkers();
                 searchLocationsNear(data);
                 setStoresList(data);
                 setOnClickListener();
@@ -44,12 +45,12 @@ const getStores = () => {
 
     })
 }
-const clearLocations = () => {
+const clearMarkers = () => {
     infoWindow.close();
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
-    markers.length = 0;
+    markers = [];
 }
 const noStoresFound = () => {
     const html = `
