@@ -10,11 +10,12 @@
         <script src="https://kit.fontawesome.com/c939d0e917.js "></script>
     </head>
     <body>
+        <div class="container">
         <div class="title">Store Locator</div>
         <div class="search-container">
             <div class="search">
                 <input id="zip-code" type="text" onkeyup="onEnter(event)" placeholder="Enter zip"/>
-                <i class="fas fa-search" onclick="getStores()"></i>
+                <i class="fas fa-search fa-flip-horizontal"onclick="getStores()"></i>
             </div>
         </div>
         <div class="stores-list-container">
@@ -25,8 +26,8 @@
                     </div>
                 </div>
             </div>
-        </div>
         <div id="map"></div>
+        </div>
         <script src="js/index.js" async defer></script>
         <script async
         src="https://maps.googleapis.com/maps/api/js?key=<API_KEY>&callback=initMap">

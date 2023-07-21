@@ -7,7 +7,11 @@ async function initMap() {
     const lasVegas = {lat: 36.188110, lng: -115.176468};
     map = new Map(document.getElementById("map"), {
     center: lasVegas,
-    zoom: 11,
+        zoom: 11,
+        mapTypeId: 'roadmap',
+        mapTypeControl: false,
+        fullscreenControl: false,
+        streetViewControl: false
 });
     infoWindow = new google.maps.InfoWindow();
     // getStore();
@@ -64,9 +68,15 @@ const setOnClickListener = () => {
     let storeElements = document.querySelectorAll('.store-container');
     //  console.log(storeElements);
     //  console.log(markers);
-    storeElements.forEach((elem, index) => {
-        elem.addEventListener('click', () => {
-            google.maps.event.trigger(markers[index], 'click');
+    storeElements.forEach((elem, index)=>{
+        elem.addEventListener('mouseover', ()=>{
+            elem.querySelector('.store-number').classList.add('store-number-hover-state')
+        })
+        elem.addEventListener('mouseout', ()=>{
+            elem.querySelector('.store-number').classList.remove('store-number-hover-state')
+        })
+        elem.addEventListener('click', function(){
+            new google.maps.event.trigger(markers[index], 'click');
         })
     })
 }
@@ -95,6 +105,7 @@ const setStoresList = (stores) => {
     document.querySelector('.stores-list').innerHTML = storesHtml;
 }
 const searchLocationsNear = (stores) => {
+    clearMarkers();
     let bounds = new google.maps.LatLngBounds();
     stores.forEach((store, index) => {
         let latlng = new google.maps.LatLng(
@@ -104,13 +115,19 @@ const searchLocationsNear = (stores) => {
         let address = store.addressLines[0];
         let phone = store.phoneNumber;
         let openStatusText = store.openStatusText;
+        let fullAddress = `${store["addressLines"][0]} ${store["addressLines"][1]}`;
         bounds.extend(latlng);
-        createMarker(latlng, name, address, openStatusText,phone, index+1);
+        createMarker(latlng, name, address, fullAddress,openStatusText,phone, index+1);
     });
     map.fitBounds(bounds);
 }
 
-const createMarker = (latlng, name, address,openStatusText,phone, storeNumber) => {
+const createMarker = (latlng, name, address,fullAddress,openStatusText,phone, storeNumber) => {
+    
+    let googleUrl = new URL("https://www.google.com/maps/dir/");
+    googleUrl.searchParams.append('api', '1');
+    googleUrl.searchParams.append('destination', fullAddress);
+    
     let html = `
             <div class="store-info-window">
                 <div class="store-info-name">
@@ -124,7 +141,7 @@ const createMarker = (latlng, name, address,openStatusText,phone, storeNumber) =
                     <i class="fas fa-location-arrow"></i>
                     </div>
                     <span>
-                    ${address}
+                    <a target="_blank" href="${googleUrl.href}">${address}</a>
                     </span>
                 </div>
                 <div class="store-info-phone">

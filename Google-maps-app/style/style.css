@@ -1,9 +1,14 @@
 body {
     margin: 0;
+    padding: 0;
+    height: 100%;
     font-family: Arial, Helvetica, sans-serif;
 }
 #map {
     height: 100vh;
+}
+.container {
+    position: relative;
 }
 .title {
     font-size: 88px;
@@ -95,6 +100,7 @@ body {
     color: white;
     margin-right: 8px;
 }
+
 
 .stores-list {
     flex-grow: 1;
