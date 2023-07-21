@@ -5,7 +5,7 @@
 ## Project Planning & Requirements
 
 - Google Maps Store Locator Mockup 
-(https://www.figma.com/file/ZzgIZDixaMi3pBq8688Pwg/PWJ-Google-Maps-Store-Locator?type=design&node-id=0-1&t=keTEpeOaP4rN36f4-0)
+(https://www.figma.com/file/tXCsbfJ2owMqtTeEKQUPfy/Google-Maps-Store-Locator?type=design&node-id=0%3A1&mode=design&t=XYWH0YKWJ7BX9Y3g-1)
 - Import Google Maps into the project (https://developers.google.com/maps/documentation/javascript/load-maps-js-api#javascript)
 - Add marker on the Map 
   (https://developers.google.com/maps/documentation/javascript/examples/marker-simple)
